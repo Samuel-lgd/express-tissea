@@ -2,20 +2,31 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const lineSchema = new Schema({
+    categoryId: {
+        type: Schema.Types.ObjectId,
+        ref: 'Category',
+        required: true
+    },
     name: {
         type: String,
-        required: true,
+        required: true
     },
-    type: {
+    createdAt: {
+        type: Date,
+        default: Date.now
+    },
+    startOfActivity: {
         type: String,
-        enum: ['Bus', 'Metro', 'Tram', 'Train'],
-        default: 'Bus',
-        required: true,
+        default: '05:00'
     },
-    color: {
+    endOfActivity: {
         type: String,
-        required: true,
+        default: '22:00'
     },
+    stops: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Stop'
+    }]
 });
 
 module.exports = mongoose.model('Line', lineSchema);
