@@ -33,16 +33,16 @@ async function seedDB() {
 
         console.log('[seed] Seeding de la BDD...');
         const categoriesData = [
-            { name: 'Bus' },
-            { name: 'Metro' }
+            { name: 'Bus', created_at: new Date(), updated_at: new Date() },
+            { name: 'Metro', created_at: new Date(), updated_at: new Date() }
         ];
         const [busCategory, metroCategory] = await Category.insertMany(categoriesData);
 
         const bus58StopsData = [
-            { name: 'Seysses', lon: 1.3166, lat: 43.5168, orderIndex: 0 },
-            { name: 'Frouzins', lon: 1.3167, lat: 43.5268, orderIndex: 1 },
-            { name: 'Villeneuve', lon: 1.3168, lat: 43.5368, orderIndex: 2 },
-            { name: 'Cugnaux', lon: 1.3169, lat: 43.5468, orderIndex: 3 }
+            { name: 'Seysses', lon: 1.3166, lat: 43.5168, orderIndex: 0, created_at: new Date(), updated_at: new Date() },
+            { name: 'Frouzins', lon: 1.3167, lat: 43.5268, orderIndex: 1, created_at: new Date(), updated_at: new Date() },
+            { name: 'Villeneuve', lon: 1.3168, lat: 43.5368, orderIndex: 2, created_at: new Date(), updated_at: new Date() },
+            { name: 'Cugnaux', lon: 1.3169, lat: 43.5468, orderIndex: 3, created_at: new Date(), updated_at: new Date() },
         ];
         const bus58Stops = [];
         for (const stopObj of bus58StopsData) {
@@ -52,11 +52,11 @@ async function seedDB() {
         await Stop.insertMany(bus58Stops);
 
         const metroAStopsData = [
-            { name: 'Patte d\'oie', lon: 1.4100, lat: 43.6000, orderIndex: 0 },
-            { name: 'Saint Cyprien', lon: 1.4020, lat: 43.5900, orderIndex: 1 },
-            { name: 'Esquirol', lon: 1.4470, lat: 43.6010, orderIndex: 2 },
-            { name: 'Capitole', lon: 1.4420, lat: 43.6050, orderIndex: 3 },
-            { name: 'Jean Jaurès', lon: 1.4530, lat: 43.6070, orderIndex: 4 }
+            { name: 'Patte d\'oie', lon: 1.4100, lat: 43.6000, orderIndex: 0, created_at: new Date(), updated_at: new Date() },
+            { name: 'Saint Cyprien', lon: 1.4020, lat: 43.5900, orderIndex: 1, created_at: new Date(), updated_at: new Date() },
+            { name: 'Esquirol', lon: 1.4470, lat: 43.6010, orderIndex: 2, created_at: new Date(), updated_at: new Date() },
+            { name: 'Capitole', lon: 1.4420, lat: 43.6050, orderIndex: 3, created_at: new Date(), updated_at: new Date() },
+            { name: 'Jean Jaurès', lon: 1.4530, lat: 43.6070, orderIndex: 4, created_at: new Date(), updated_at: new Date() },
         ];
         const metroAStops = [];
         for (const stopObj of metroAStopsData) {
@@ -70,14 +70,18 @@ async function seedDB() {
             name: 'Bus 58',
             startOfActivity: '05:00',
             endOfActivity: '23:00',
-            stops: bus58Stops.map(s => s._id)
+            stops: bus58Stops.map(s => s._id),
+            created_at: new Date(),
+            updated_at: new Date()
         });
         const metroALine = new Line({
             categoryId: metroCategory._id,
             name: 'Metro A',
             startOfActivity: '06:00',
             endOfActivity: '01:00',
-            stops: metroAStops.map(s => s._id)
+            stops: metroAStops.map(s => s._id),
+            created_at: new Date(),
+            updated_at: new Date()
         });
 
         await bus58Line.save();
@@ -87,7 +91,9 @@ async function seedDB() {
         const hashedPassword = await bcrypt.hash('password', saltRounds);
         const testUser = new User({
             email: 'test@test.com',
-            password: hashedPassword
+            password: hashedPassword,
+            created_at: new Date(),
+            updated_at: new Date()
         });
         await testUser.save();
 

@@ -1,8 +1,9 @@
 const Stop = require('../models/stop.model');
 const Line = require('../models/line.model');
 
+// Haversine
 function calcDistanceKm(coords1, coords2) {
-    const R = 6371; // yrayon de la terre
+    const R = 6371;
     const [lon1, lat1] = coords1;
     const [lon2, lat2] = coords2;
 

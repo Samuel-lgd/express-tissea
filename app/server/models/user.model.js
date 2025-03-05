@@ -10,6 +10,14 @@ const userSchema = new Schema({
     password: {
         type: String,
         required: [true, 'Password is required']
+    },
+    created_at: {
+        type: Date,
+        default: Date.now
+    },
+    updated_at: {
+        type: Date,
+        default: Date.now
     }
 });
 

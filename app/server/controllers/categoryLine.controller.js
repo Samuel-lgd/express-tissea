@@ -65,7 +65,6 @@ exports.getLineStopsDetails = async (req, res) => {
 };
 
 // 8) POST - /api/categories/:id/lines/:lineId/stops
-// Ajout d'un arrêt sur la ligne sans avoir deux terminus.
 exports.addStopToLine = async (req, res) => {
     try {
         const { lineId } = req.params;
